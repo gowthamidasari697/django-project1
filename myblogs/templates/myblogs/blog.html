@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Blogs</title>
+       {{x.media}}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        #footer {
+            position: fixed;
+            padding: 10px 10px 0px 10px;
+            bottom: 0;
+            width: 100%;
+            /* Height of the footer*/
+            height: 40px;
+            background: black;
+        }
+     </style>
+</head>
+<body>
+    {% include 'myblogs/navbar.html' %}
+    <div class="container card mt-5  mb-5 mx-auto" style="width:60rem">
+        <h1 class="text-success text-center mt-2">Add Blogs</h1>
+{% comment %} action= this tells the browser to return the form data to the URL action='', using the POST method. {% endcomment %}
+        <form method="post" action="" enctype="multipart/form-data" class="container mt-3 mb-3 ">
+            {% csrf_token %}
+{% comment %} Here {{ form.as_p }} will render them wrapped in <p> tags. {% endcomment %}
+              {{x.as_p }} 
+            <button class="btn btn-primary  mt-2" type="submit">Submit</button>
+        </form>
+  </div>
+  <div id="footer">
+    {% include 'myblogs/footer.html'%}
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

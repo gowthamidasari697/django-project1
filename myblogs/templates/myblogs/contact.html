@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      #footer {
+          position: fixed;
+          padding: 10px 10px 0px 10px;
+          bottom: 0;
+          width: 100%;
+          /* Height of the footer*/
+          height: 40px;
+          background: black;
+      }
+   </style>
+</head>
+<body>
+  {% include 'myblogs/navbar.html' %}
+  <div class="container mx-auto" style="width:30rem">
+    <h1 class="text-success text-center mt-2 mb-3">Contact Us</h1>
+    <div class="container">
+      {% if feedback %}
+      <h1 class="alert alert-success mt-2">{{feedback}}</h1>
+      {% endif %}
+      {% comment %} form bootstrap {% endcomment %}
+      <form method="post" action=''>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="user_Email" name="user_Email"placeholder="name@example.com " required>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+          <textarea class="form-control" id="message" name="message" maxlength=200 rows="3" required></textarea>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    </form>
+    </div>
+    {% comment %}  {% endcomment %}
+    {% comment %} include the maps page  {% endcomment %}
+    <div class="container text-center">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.022382143135!2d77.27972422553597!3d28.44874167576557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce0aa4acf2f23%3A0xa50673272a28bd54!2sManav%20Rachna%20University%2C%20Suraj%20Kund%20Badkhal%20Rd%2C%20Aravali%20Hills%2C%20Sector%2043%2C%20Faridabad%2C%20Haryana%20121003!5e0!3m2!1sen!2sin!4v1705464182045!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="mb-5"></iframe>
+    </div>
+  </div>
+    {% comment %} include the footer page in contact page {% endcomment %}
+    <div id="footer">
+    {% include 'myblogs/footer.html'%}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>  
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOG DETAILS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+</head>
+<body>
+    <div>
+        {% comment %} <img src="{{ obj.blog_img.url }}" class=" card-img-top text-center"  alt="...">
+        <br><br><br> {% endcomment %}
+        <div class="container mt-3" >
+        <h2 class="text-center container alert alert-warning mt-1 mb-1">{{ obj.blog_name }}</h2>
+        <h5>{{ obj.blog_description | safe}}</h5><br>
+        </div>
+        <br>
+        <div class="container text-center card mb-4">
+            <a name="like" href="{% url 'addlikes' obj.id %}">
+            <i class="bi bi-hand-thumbs-up-fill"style="font-size: 3rem; color:red;"></i></a><br>
+            <h3>Likes : {{obj.like_btn}}</h3>
+            <h3>Views : {{obj.view_btn}}</h3>
+            <br>
+            {% comment %} Displaying comment  {% endcomment %}
+            {% for comment in obj.comments.all %}
+                <h6> {{ comment.blog_author.username }} on {{ comment.comment_date }}</h6>
+                {% if comment.blog_author == user %}
+                    <p>{{ comment.blog_comment }}
+                        <a href="{% url 'edit_comment' obj.id  comment.id %}" class="btn btn-info " style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Edit</a>
+                        <a href="{% url 'delete_comment' obj.id comment.id %}" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Delete</a>
+                    </p>    
+                {% endif %}
+            {% endfor %}
+            {% comment %}  end Displaying comment  {% endcomment %}
+           {% comment %} adding comments {% endcomment %}
+
+            {% if user.is_authenticated%}
+            <form method="post" action="{% url 'blog_comment' obj.id%}">
+                {%csrf_token%}
+                <h3>{{comment.as_p}}</h3>
+                <button class="btn btn-primary mt-2 mb-2" type="sudmit"><b>Sudmit</b></button> 
+            </form>
+            {% endif %}
+            <br>
+            Category : {{obj.blog_cat}}
+            <br>
+            {% comment %} end adding comments {% endcomment %}
+        </div>   
+    </div>
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> {% endcomment %}
+</body>
+</html>
